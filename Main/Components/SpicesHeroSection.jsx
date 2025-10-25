@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PixelSmiley from './PixelSmiley';
 
 export default function SpicesHeroSection() {
   const [position, setPosition] = useState(0);
@@ -17,46 +16,36 @@ export default function SpicesHeroSection() {
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
       
-      {/* Wireframe Chili Peppers - Top Right */}
-      
-      {/* Top Product Label */}
-      <div className="absolute top-28 left-44 flex items-center gap-3 z-30">
-        
-      </div>
-
       {/* Main Content Area */}
-      <div className="relative pt-52 px-32 pb-20">
+      <div className="relative pt-24 sm:pt-32 md:pt-40 lg:pt-52 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 pb-12 sm:pb-16 md:pb-20">
         
-        {/* Background Large Circle - Bottom Left */}
-        <div className="absolute bottom-32 left-20 w-[550px] h-[550px] bg-white/10 rounded-full"></div>
-        
-        {/* Brand Badge - Extends outside card */}
-       
+        {/* Background Large Circle - Bottom Left (hidden on mobile) */}
+        <div className="hidden md:block absolute bottom-16 md:bottom-24 lg:bottom-32 left-8 md:left-12 lg:left-20 w-[300px] md:w-[400px] lg:w-[550px] h-[300px] md:h-[400px] lg:h-[550px] bg-white/10 rounded-full"></div>
 
         {/* Main Content Card */}
-        <div className="relative bg-[#ececec] rounded-[3rem] overflow-hidden" style={{height: '600px'}}>
+        <div className="relative bg-[#ececec] rounded-3xl sm:rounded-[2.5rem] md:rounded-[3rem] overflow-hidden min-h-[500px] sm:min-h-[550px] md:min-h-[600px]">
           
-          {/* Top Right White Circle - More visible animation */}
+          {/* Top Right White Circle - Responsive animation */}
           <div 
-            className="absolute top-20 right-32 w-80 h-80 bg-white rounded-full shadow-lg"
+            className="absolute top-8 sm:top-12 md:top-16 lg:top-20 right-8 sm:right-16 md:right-24 lg:right-32 w-32 sm:w-48 md:w-64 lg:w-80 h-32 sm:h-48 md:h-64 lg:h-80 bg-white rounded-full shadow-lg"
             style={{ 
               transform: `translateY(${Math.sin(position * 0.05) * 40}px)`,
               animation: 'floatUp 6s ease-in-out infinite'
             }}
           ></div>
           
-          {/* Bottom Center Large White Circle - More visible animation */}
+          {/* Bottom Center Large White Circle */}
           <div 
-            className="absolute -bottom-24 left-1/3 w-[500px] h-[500px] bg-white/60 rounded-full shadow-lg"
+            className="absolute -bottom-12 sm:-bottom-16 md:-bottom-20 lg:-bottom-24 left-1/4 sm:left-1/3 w-[250px] sm:w-[350px] md:w-[400px] lg:w-[500px] h-[250px] sm:h-[350px] md:h-[400px] lg:h-[500px] bg-white/60 rounded-full shadow-lg"
             style={{ 
               transform: `translateY(${Math.sin(position * 0.03) * 60}px)`,
               animation: 'floatUp 8s ease-in-out infinite'
             }}
           ></div>
           
-          {/* Additional floating white circle for more visibility */}
+          {/* Additional floating white circle */}
           <div 
-            className="absolute top-40 left-1/2 w-60 h-60 bg-white/80 rounded-full shadow-lg"
+            className="hidden sm:block absolute top-20 sm:top-32 md:top-40 left-1/2 w-32 sm:w-40 md:w-48 lg:w-60 h-32 sm:h-40 md:h-48 lg:h-60 bg-white/80 rounded-full shadow-lg"
             style={{ 
               transform: `translateY(${Math.sin(position * 0.04) * 50}px)`,
               animation: 'floatUp 7s ease-in-out infinite 1s'
@@ -64,62 +53,53 @@ export default function SpicesHeroSection() {
           ></div>
           
           {/* Main Heading */}
-          <div className="relative z-10 pt-32 pl-28">
-            <h1 className="text-[#ff6b4a] font-bold leading-[0.88]" style={{fontSize: '9rem', letterSpacing: '-0.025em'}}>
+          <div className="relative z-10 pt-16 sm:pt-20 md:pt-24 lg:pt-32 px-6 sm:px-12 md:px-16 lg:px-20 xl:px-28">
+            <h1 
+              className="text-[#ff6b4a] font-bold leading-[0.88] text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl"
+              style={{letterSpacing: '-0.025em'}}
+            >
               At the Forefront<br />
               of Food Sobriety
             </h1>
             
             {/* Description */}
-            <div className="mt-20 max-w-3xl">
-              
-              
+            <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 max-w-3xl">
               {/* Divider */}
-              <div className="w-full h-px bg-[#ff6b4a]/30 my-8"></div>
-              
-              {/* Spices & Herbs Section */}
-              
+              <div className="w-full h-px bg-[#ff6b4a]/30 my-4 sm:my-6 md:my-8"></div>
             </div>
           </div>
 
-          {/* Globe Image - Positioned at left edge with most of it outside */}
-          <div className="absolute bottom-0  text-black -left-48 w-[600px] h-[600px]" style={{ transform: 'translateY(40%)' }}>
+          {/* Globe Image - Positioned at left edge */}
+          <div 
+            className="absolute bottom-0 -left-24 sm:-left-32 md:-left-40 lg:-left-48 w-[250px] sm:w-[350px] md:w-[450px] lg:w-[600px] h-[250px] sm:h-[350px] md:h-[450px] lg:h-[600px]" 
+            style={{ transform: 'translateY(30%) sm:translateY(35%) md:translateY(40%)' }}
+          >
             <img
               src="/Globe-5.png" 
-              alt="Wireframe globe placeholder"
+              alt="Wireframe globe"
               className="w-full h-full object-cover"
-              style={{ 
-                // No clip path - showing full image
-                // Positioned so only right portion is visible inside the card
-              }}
             />
           </div>
 
         </div>
 
-        {/* Product Card - Overlapping on right */}
-        <div className="absolute top-80 right-20 bg-white rounded-[2rem] shadow-2xl w-[340px] z-30">
-          <div className="p-9">
-            <div className="mb-8">
+        {/* Product Card - Overlapping on right (responsive positioning) */}
+        <div className="absolute top-48 sm:top-56 md:top-64 lg:top-80 right-4 sm:right-8 md:right-12 lg:right-20 bg-white rounded-2xl sm:rounded-3xl md:rounded-[2rem] shadow-2xl w-[280px] sm:w-[300px] md:w-[320px] lg:w-[340px] z-30">
+          <div className="p-5 sm:p-6 md:p-7 lg:p-9">
+            <div className="mb-6 sm:mb-7 md:mb-8">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 rounded-full bg-[#ff6b44a]"></div>
-                
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#ff6b4a]"></div>
               </div>
-              <p className="text-[#ff6b4a] text-3xl mt-2">Timut Pepper</p>
+              <p className="text-[#ff6b4a] text-xl sm:text-2xl md:text-3xl mt-2">Timut Pepper</p>
             </div>
-            
-            {/* Split Sphere */}
-            
           </div>
           
           {/* Bottom right brown circle badge */}
-          <div className="absolute bottom-7 right-7 w-12 h-12 bg-[#5d3a1a] rounded-full shadow-lg"></div>
+          <div className="absolute bottom-4 sm:bottom-5 md:bottom-6 lg:bottom-7 right-4 sm:right-5 md:right-6 lg:right-7 w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 bg-[#5d3a1a] rounded-full shadow-lg"></div>
         </div>
       </div>
 
-      {/* Bottom Navigation */}
-      
-      {/* CSS for more pronounced animation */}
+      {/* CSS for animation */}
       <style jsx>{`
         @keyframes floatUp {
           0%, 100% {

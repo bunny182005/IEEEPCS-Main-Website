@@ -78,7 +78,7 @@ const Crazy = () => {
     // Add embroidery effect - create small cross stitches
     context.save();
     context.strokeStyle = '#ff6b6b';
-    ctx.lineWidth = 1;
+    context.lineWidth = 1;
     context.moveTo(coords.x - 3, coords.y);
     context.lineTo(coords.x + 3, coords.y);
     context.moveTo(coords.x, coords.y - 3);
@@ -102,6 +102,7 @@ const Crazy = () => {
   // Touch event handlers
   const handleTouchStart = (e) => {
     e.preventDefault();
+    if (!context) return;
     if (e.touches.length === 1) {
       const touch = e.touches[0];
       const coords = getCanvasCoordinates(touch.clientX, touch.clientY);
@@ -113,27 +114,28 @@ const Crazy = () => {
 
   const handleTouchMove = (e) => {
     e.preventDefault();
-    if (isDrawing && e.touches.length === 1) {
-      const touch = e.touches[0];
-      const coords = getCanvasCoordinates(touch.clientX, touch.clientY);
-      context.lineTo(coords.x, coords.y);
-      context.stroke();
+    if (!context || !isDrawing || e.touches.length !== 1) return;
+    
+    const touch = e.touches[0];
+    const coords = getCanvasCoordinates(touch.clientX, touch.clientY);
+    context.lineTo(coords.x, coords.y);
+    context.stroke();
 
-      // Add embroidery effect for touch
-      context.save();
-      context.strokeStyle = '#ff6b6b';
-      context.lineWidth = 1;
-      context.moveTo(coords.x - 3, coords.y);
-      context.lineTo(coords.x + 3, coords.y);
-      context.moveTo(coords.x, coords.y - 3);
-      context.lineTo(coords.x, coords.y + 3);
-      context.stroke();
-      context.restore();
-    }
+    // Add embroidery effect for touch
+    context.save();
+    context.strokeStyle = '#ff6b6b';
+    context.lineWidth = 1;
+    context.moveTo(coords.x - 3, coords.y);
+    context.lineTo(coords.x + 3, coords.y);
+    context.moveTo(coords.x, coords.y - 3);
+    context.lineTo(coords.x, coords.y + 3);
+    context.stroke();
+    context.restore();
   };
 
   const handleTouchEnd = (e) => {
     e.preventDefault();
+    if (!context) return;
     context.closePath();
     setIsDrawing(false);
   };
@@ -141,15 +143,15 @@ const Crazy = () => {
   return (
     <div 
       ref={containerRef}
-      className="relative w-full h-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden"
+      className="relative w-full min-h-screen sm:min-h-[600px] md:min-h-[700px] lg:min-h-[800px] bg-white border-2 border-gray-300 rounded-lg overflow-hidden"
     >
-      <h1 className='font-bold text-7xl absolute top-4 left-4 px-4 py-2 z-10 text-black'>
+      <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl absolute top-2 sm:top-3 md:top-4 left-2 sm:left-3 md:left-4 px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 z-10 text-black">
         Your Craftship
       </h1>
     
       <canvas
         ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full cursor-crosshair bg-white"
+        className="absolute top-0 left-0 w-full h-full cursor-crosshair touch-none bg-white"
         onMouseDown={startDrawing}
         onMouseMove={draw}
         onMouseUp={stopDrawing}
@@ -161,7 +163,7 @@ const Crazy = () => {
       
       <button
         onClick={clearCanvas}
-        className="absolute top-4 right-4 px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 font-medium z-10 text-lg"
+        className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 bg-red-500 text-white rounded-md sm:rounded-lg hover:bg-red-600 active:bg-red-700 transition-colors duration-200 font-medium z-10 text-sm sm:text-base md:text-lg shadow-md hover:shadow-lg"
       >
         Clear
       </button>
